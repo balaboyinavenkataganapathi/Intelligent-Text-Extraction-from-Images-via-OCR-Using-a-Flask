@@ -1,0 +1,1 @@
+# Intelligent-Text-Extraction-from-Images-via-OCR-Using-a-Flask
