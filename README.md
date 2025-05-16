@@ -1,98 +1,92 @@
-# OCR-Based Text Extraction API Using Flask & PHP
+# OCR-Based Text Extraction API Using Flask
 
-## 📌 Project Overview
-This project provides an **OCR-based text extraction API** using Flask and integrates with a PHP client for uploading images and PDFs. The API extracts text from:
-- **Images** using **Tesseract OCR**.
-- **PDFs** using **pdfplumber**.
+This project provides a lightweight and easy-to-use REST API for extracting text from images using Optical Character Recognition (OCR). Built with Flask, the API accepts image uploads, processes them using the Tesseract OCR engine, and returns the extracted text in JSON format.
 
-The **Flask server** processes the files, while the **PHP frontend** allows users to upload images or PDFs and view the extracted text.
+## 🧠 Features
 
----
+* 📷 Accepts image files via HTTP POST
+* 🔍 Uses Tesseract OCR for text recognition
+* 🔁 Returns extracted text in JSON format
+* 🔓 Lightweight and open-source
+* ⚙️ Easily deployable as a microservice
 
-## 🚀 Features
-✔ Extract text from images using **OCR (Tesseract)**  
-✔ Extract text from PDFs using **pdfplumber**  
-✔ API accessible via **Flask Blueprint routing**  
-✔ PHP interface for easy file uploads  
-✔ Supports **both file uploads and URLs**  
+## 🚀 Project Structure
 
----
-
-## 📂 Project Structure
 ```
-/project_folder
-│── server.py              # Main Flask server
-│── ocr.py                 # OCR-based image text extraction
-│── pdf_extractor.py        # PDF text extraction
-│── client.php              # PHP client for file uploads
+OCR-Based-Text-Extraction-API-Using-Flask/
+├── app.py                  # Main Flask application
+├── requirements.txt        # Python dependencies
+├── static/                 # Folder to store uploaded images (optional)
+└── README.md               # Project documentation
 ```
 
----
+## 🛠️ Requirements
 
-## 🔧 Pre-requirements
-Before running this project, ensure you have the following:
+* Python 3.7+
+* [Tesseract OCR](https://github.com/tesseract-ocr/tesseract)
+* pip (Python package manager)
 
-### **1️⃣ Install Python (3.8 or higher)**
-Check if Python is installed:
-```cmd
-python --version
+## 📦 Installation
+
+1. **Clone the Repository**
+
+```bash
+git clone https://github.com/your-username/OCR-Based-Text-Extraction-API-Using-Flask.git
+cd OCR-Based-Text-Extraction-API-Using-Flask
 ```
 
-### **2️⃣ Install PHP (for Client)**
-Check if PHP is installed:
-```cmd
-php -v
+2. **Install Python Dependencies**
+
+```bash
+pip install -r requirements.txt
 ```
 
-### **3️⃣ Install Required Python Modules**
-Run the following command:
-```cmd
-pip install flask requests pdfplumber pytesseract pillow
+3. **Install Tesseract OCR**
+
+* **Ubuntu/Debian:**
+
+  ```bash
+  sudo apt update
+  sudo apt install tesseract-ocr
+  ```
+* **macOS (using Homebrew):**
+
+  ```bash
+  brew install tesseract
+  ```
+* **Windows:**
+  Download and install from [Tesseract OCR official page](https://github.com/tesseract-ocr/tesseract/wiki).
+
+> Make sure `tesseract` is added to your system PATH.
+
+## ▶️ Running the Application
+
+```bash
+python app.py
 ```
 
----
+By default, the Flask app will run on: `http://127.0.0.1:5000/`
 
-## 📦 Python Modules & Versions
-| Module      | Version  |
-|------------|---------|
-| Flask      | 3.0.0   |
-| requests   | 2.31.0  |
-| pdfplumber | 0.9.0   |
-| pytesseract | 0.3.10  |
-| Pillow     | 10.0.1  |
+## 📄 API Usage
 
----
+### Endpoint: `/extract-text`
 
-## 🚀 Running the Project
-### **1️⃣ Start Flask Server**
-Run the following command:
-```cmd
-python server.py
+**Method:** `POST`
+**Content-Type:** `multipart/form-data`
+**Field name:** `image`
+
+#### Example using `curl`:
+
+```bash
+curl -X POST -F image=@example.jpg http://127.0.0.1:5000/extract-text
 ```
 
----
+#### Response:
 
-## 🔗 API Endpoints
-
-### **Test with Your Example Image**
-Open in browser (For OCR Image):
-```
-http://127.0.0.1:5000/extract/image?url=https://thumbs.dreamstime.com/z/old-newspaper-design-vector-template-vintage-retro-background-text-images-77345579.jpg
+```json
+{
+  "extracted_text": "This is the text found in the image."
+}
 ```
 
-Execute in **CMD**:
-```cmd
-curl "http://127.0.0.1:5000/extract/image?url=https://thumbs.dreamstime.com/z/old-newspaper-design-vector-template-vintage-retro-background-text-images-77345579.jpg"
-```
-
-### **Test with Your Example PDF**
-Open in browser (For PDF extraction):
-```
-http://127.0.0.1:5000/extract/pdf?url=https://arxiv.org/pdf/1706.03762.pdf
-```
-
-Execute in **CMD**:
-```cmd
-curl "http://127.0.0.1:5000/extract/pdf?url=https://arxiv.org/pdf/1706.03762.pdf"
-```
 
